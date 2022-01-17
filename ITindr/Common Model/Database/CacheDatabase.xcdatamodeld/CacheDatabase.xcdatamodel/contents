@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ChatListItemLocal" representedClassName=".ChatListItemLocal" syncable="YES">
+        <relationship name="chat" maxCount="1" deletionRule="Nullify" destinationEntity="ChatLocal" inverseName="chatListItem" inverseEntity="ChatLocal"/>
+        <relationship name="lastMessage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MessageLocal" inverseName="chatListItem" inverseEntity="MessageLocal"/>
+    </entity>
+    <entity name="ChatLocal" representedClassName=".ChatLocal" syncable="YES">
+        <attribute name="avatar" optional="YES" attributeType="String"/>
+        <attribute name="id" attributeType="String" defaultValueString=""/>
+        <attribute name="title" attributeType="String" defaultValueString=""/>
+        <relationship name="chatListItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChatListItemLocal" inverseName="chat" inverseEntity="ChatListItemLocal"/>
+    </entity>
+    <entity name="MessageLocal" representedClassName=".MessageLocal" syncable="YES">
+        <attribute name="attachments" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[String]"/>
+        <attribute name="chatId" attributeType="String"/>
+        <attribute name="createdAt" attributeType="Date" defaultDateTimeInterval="0" usesScalarValueType="NO"/>
+        <attribute name="id" attributeType="String" defaultValueString=""/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <relationship name="chatListItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChatListItemLocal" inverseName="lastMessage" inverseEntity="ChatListItemLocal"/>
+        <relationship name="user" maxCount="1" deletionRule="Nullify" destinationEntity="UserLocal" inverseName="message" inverseEntity="UserLocal"/>
+    </entity>
+    <entity name="TopicLocal" representedClassName=".TopicLocal" syncable="YES">
+        <attribute name="id" attributeType="String" defaultValueString=""/>
+        <attribute name="title" attributeType="String" defaultValueString=""/>
+        <relationship name="user" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UserLocal" inverseName="topics" inverseEntity="UserLocal"/>
+    </entity>
+    <entity name="UserLocal" representedClassName=".UserLocal" syncable="YES">
+        <attribute name="aboutMyself" optional="YES" attributeType="String"/>
+        <attribute name="avatar" optional="YES" attributeType="String"/>
+        <attribute name="name" attributeType="String" defaultValueString=""/>
+        <attribute name="userId" attributeType="String" defaultValueString=""/>
+        <relationship name="message" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MessageLocal" inverseName="user" inverseEntity="MessageLocal"/>
+        <relationship name="topics" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TopicLocal" inverseName="user" inverseEntity="TopicLocal"/>
+    </entity>
+    <elements>
+        <element name="ChatListItemLocal" positionX="-307.1953125" positionY="-73.51171875" width="128" height="73"/>
+        <element name="ChatLocal" positionX="122.8125" positionY="-118.02734375" width="104.3515625" height="103"/>
+        <element name="MessageLocal" positionX="-75.17578125" positionY="20.9609375" width="128" height="148"/>
+        <element name="TopicLocal" positionX="-513.2734375" positionY="96.1015625" width="128" height="88"/>
+        <element name="UserLocal" positionX="-329.88671875" positionY="50.18359375" width="128" height="133"/>
+    </elements>
+</model>
